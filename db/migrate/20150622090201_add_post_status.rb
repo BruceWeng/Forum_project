@@ -1,5 +1,5 @@
 class AddPostStatus < ActiveRecord::Migration
   def change
-    add_column :post, :status, :string
+    add_column :posts, :status, :string
   end
 end
