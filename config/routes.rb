@@ -1,16 +1,15 @@
 Rails.application.routes.draw do
+  devise_for :users
+  resources :posts do
+    resources :comments
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  resources :posts do
-    resources :comments, :controller => "post_comments"
-  end
-  resources :users do
-    resources :posts, :controller => "user_posts"
-    resources :comments, :controller => "user_comments"
-  end
-  root 'posts#index'
+
+
+  # root 'posts#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_post, :only => [:show, :edit, :update, :destroy]
   private
 
@@ -18,12 +19,14 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post =Post.new
+    @post = Post.new
   end
 
   def create
-    @post =Post.new(params[:post])
+    @post = Post.new(post_params)
+
     @post.save
+
     redirect_to posts_url
   end
 
@@ -41,6 +44,7 @@ class PostsController < ApplicationController
   end
 
   def show
+
   end
 
 
