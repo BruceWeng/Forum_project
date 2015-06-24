@@ -9,7 +9,6 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :content)
-
   end
 
   public
@@ -23,6 +22,11 @@ class PostsController < ApplicationController
   end
 
   def create
+    Rails.logger.info('=========')
+    Rails.logger.info(params)
+    Rails.logger.info('=========')
+    Rails.logger.info(post_params)
+    Rails.logger.info('=========')
     @post = Post.new(post_params)
 
     @post.save
@@ -44,6 +48,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    @comment = Comment.new
 
   end
 
