@@ -1,7 +1,7 @@
 <h1><%= @post.title %></h1>
 <p><%= @post.content %></p>
 <% simple_format(@post.content) %>
-<h3>Answer</h3>
+<h3><%= @post.comments_count %> Answers</h3>
 <hr>
 <% @post.comments.each do |comment| %>
   <p><%= comment.content %></p>
