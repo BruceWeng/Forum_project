@@ -1,4 +1,7 @@
 <%= form_for @post, :url => posts_path do |f| %>
   <%= render :partial => 'form', :locals => { :f => f} %>
+  <br>
+  <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) %>
+  <br>
   <%= f.submit "Create" %>
 <% end %>
