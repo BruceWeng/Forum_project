@@ -15,6 +15,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
+    prepare_variable_for_index_template
   end
 
   def new
@@ -51,6 +52,11 @@ class PostsController < ApplicationController
     @comment = Comment.new
 
   end
+  def prepare_variable_for_index_template
+    if params[:order]
+      @posts = @posts.order("comments_time DESC")
+    end
 
+  end
 
 end

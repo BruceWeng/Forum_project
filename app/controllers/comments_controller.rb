@@ -13,6 +13,8 @@ class CommentsController < ApplicationController
 
     post = Post.find(params[:post_id])
     post.comments.create(comment_params)
+    post.comments_time = post.comments.last.created_at
+    post.save
     redirect_to post_path(post)
   end
 
