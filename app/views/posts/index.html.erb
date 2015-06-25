@@ -1,5 +1,12 @@
 <%= link_to "Sort by last comment time", posts_path(:order_by_time => "time") %>
 <%= link_to "Sorted by numbers of comments", posts_path(:order_by_count =>"count") %>
+<br>
+<%= form_tag posts_path do |f| %>
+<%= collection_check_boxes(:post, :category_ids, Category.all, :id, :name) do |box| %>
+  <%= box.label(:"data-value" => box.value){box.check_box + box.text} %>
+<%end%>
+<%= submit_tag "Search" %>
+<% end %>
 <ul>
   <% @posts.each do |post| %>
     <li>
