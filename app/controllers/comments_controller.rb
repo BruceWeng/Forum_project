@@ -15,7 +15,5 @@ class CommentsController < ApplicationController
     post.comments.create(comment_params)
     redirect_to post_path(post)
   end
-  def count
-    @count = Post.comments.count
-  end
+
 end
