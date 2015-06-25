@@ -16,6 +16,7 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all
     prepare_variable_for_index_template
+    @posts = Post.page(params[:page]).per(5)
   end
 
   def new
