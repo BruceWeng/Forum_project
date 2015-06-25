@@ -53,8 +53,10 @@ class PostsController < ApplicationController
 
   end
   def prepare_variable_for_index_template
-    if params[:order]
+    if params[:order_by_time]
       @posts = @posts.order("comments_time DESC")
+    elsif params[:order_by_count]
+      @posts = @posts.order("comments_count DESC")
     end
 
   end
