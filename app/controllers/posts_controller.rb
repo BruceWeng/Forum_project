@@ -13,6 +13,9 @@ class PostsController < ApplicationController
 
   public
 
+  def about
+
+  end
   def index
     @posts = Post.all
     prepare_variable_for_index_template

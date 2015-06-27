@@ -3,8 +3,11 @@ class UserProfileController < ApplicationController
 
   private
   def set_profile
-    @profile = current_user.profile
+    @user = User.find.params[:id]
+    @profile = @user.profile
   end
+
+  public
   def edit
 
   end

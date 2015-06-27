@@ -1,0 +1,13 @@
+<h1><%= @user.name %> 's profile</h1>
+<%= form_for @user, :url =posts_path do |f| %>
+  <%= render :partial => 'form', :locals => {:f = f} %>
+  <%= f.label :email, "Email" %>
+  <%= f.text_area :email %>
+  <%= f.label :encrypted_password, "Password" %>
+  <%= f.text_area :encrypted_password %>
+  <%= f.fields_for :profile do |profile_form| %>
+    <%= profile_form.label :name, "name" %>
+    <%= profile_form.text_field :name %>
+  <% end %>
+  <%= f.submit "Update" %>
+<% end %>
