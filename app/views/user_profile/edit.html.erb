@@ -1,5 +1,5 @@
 <h1><%= @user.name %> 's profile</h1>
-<%= form_for @user, :url =posts_path do |f| %>
+<%= form_for @user, :url => user_profile_path, :method => :patch do |f| %>
   <%= render :partial => 'form', :locals => {:f = f} %>
   <%= f.label :email, "Email" %>
   <%= f.text_area :email %>
