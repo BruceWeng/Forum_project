@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   end
   resources :users do
     member do
-      resource :user_profile, :only =>[:show, :edit, :update]
+      resource :user_profile, :controller => :user_profile, :only =>[:show, :edit, :update]
       resource :favorite, :only =>[:show, :new, :destroy]
       resource :draft, :only =>[:new, :edit, :update, :destroy]
     end
@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
 
 
-  root 'user_profile#index'
+  root 'user_profile#show'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

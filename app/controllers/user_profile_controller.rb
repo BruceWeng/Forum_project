@@ -1,5 +1,5 @@
 class UserProfileController < ApplicationController
-  before_action :authenticate_user!, :set_profile, :only =>[:index, :edit, :update]
+  before_action :authenticate_user!, :set_profile, :only =>[:show, :edit, :update]
 
   private
   def set_profile
@@ -9,16 +9,17 @@ class UserProfileController < ApplicationController
   end
 
   public
-  def index
+  def show
     @name = @profile.name
     @email = @user.email
 
   end
   def edit
+    @name = @profile.name
 
   end
   def update
-    @user.save
-    redirect_to :index
+    @profile.update(params.require(:profile).permit(:name))
+    redirect_to :action => :show
   end
 end
