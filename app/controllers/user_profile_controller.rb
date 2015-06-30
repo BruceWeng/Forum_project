@@ -2,10 +2,12 @@ class UserProfileController < ApplicationController
   before_action :authenticate_user!, :set_profile, :only =>[:show, :edit, :update]
 
   def show
+
     @name = @user.profile.name
     @email = @user.email
-
+    @comments = @user.comments.where(params[:id])
   end
+
   def edit
     @name = @user.profile.name
   end

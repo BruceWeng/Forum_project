@@ -10,8 +10,8 @@ class CommentsController < ApplicationController
     # redirect_to post_path(params[:post_id])
 
     post = Post.find(params[:post_id])
-    post.comments.create!(comment_params)
-
+    @comment = post.comments.new(comment_params)
+    @comment.user = current_user
     post.comments_time = post.comments.last.created_at
     post.save!
 
