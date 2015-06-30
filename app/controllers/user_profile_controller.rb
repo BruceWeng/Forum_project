@@ -19,8 +19,9 @@ class UserProfileController < ApplicationController
 
   end
   def update
-    if patams[:_remove_logo] "1"
+    if patams[:_remove_logo] == "1"
       @post.logo = nil
+    end
     @profile.update!(profile_params)
     redirect_to :action => :show
   end
