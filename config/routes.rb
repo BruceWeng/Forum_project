@@ -4,13 +4,11 @@ Rails.application.routes.draw do
     resources :comments
   end
   resources :users do
-    member do
-      resource :user_profile, :controller => :user_profile, :only =>[:show, :edit, :update]
-      resource :favorite, :only =>[:show, :new, :destroy]
-      resource :draft, :only =>[:new, :edit, :update, :destroy]
-    end
+   resource :profile, :controller => :user_profile, :only =>[:show, :edit, :update]
   end
-  resource :about, :only => :show, :controller =>:about
+
+  get "/about" => "about#show"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

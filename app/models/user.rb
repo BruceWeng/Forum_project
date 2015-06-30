@@ -5,5 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_one :profile
   has_many :posts
+
   accepts_nested_attributes_for :profile, :allow_destroy => true, :reject_if => :all_blank
+
 end
