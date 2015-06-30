@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150626065525) do
+ActiveRecord::Schema.define(version: 20150630071234) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -41,13 +41,17 @@ ActiveRecord::Schema.define(version: 20150626065525) do
   create_table "posts", force: :cascade do |t|
     t.string   "title"
     t.text     "content"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.string   "status"
     t.integer  "post_id"
     t.integer  "user_id"
     t.integer  "comments_count"
     t.datetime "comments_time"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
   end
 
   add_index "posts", ["user_id"], name: "index_posts_on_user_id"
@@ -74,6 +78,8 @@ ActiveRecord::Schema.define(version: 20150626065525) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "facebook_uid"
+    t.string   "token"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
