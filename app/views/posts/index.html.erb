@@ -26,12 +26,14 @@
       <% end %>
       <%= post.title %>
       <%= link_to "Show", post_path(post) %>
-
+      <% if post.user %>
+        from <%= link_to post.user.profile.name, user_profile_path(post.user) %>
+      <% end %>
       <% if post.user == current_user %>
         <%= link_to "Edit", edit_post_path(post) %>
         <%= link_to "Delete", post_path(post), :method => :delete, :data => {:confirm => "Are you sure?"} %>
-      last comment at <%= post.comments.last.try(:created_at) %>
       <% end %>
+      last comment at <%= post.comments.last.try(:created_at) %>
     </li>
   <% end %>
 </ul>

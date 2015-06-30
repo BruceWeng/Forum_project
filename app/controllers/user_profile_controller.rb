@@ -20,7 +20,11 @@ class UserProfileController < ApplicationController
   private
 
   def set_profile
-    @user = current_user
+    if params[:user_id] == nil
+      @user = current_user
+    else
+      @user = User.find(params[:user_id])
+    end
     @user.build_profile unless current_user.profile
   end
 
