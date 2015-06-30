@@ -1,3 +1,9 @@
+<% if @post.logo.exists? %>
+  <%= image_tag(@post.logo.url(:medium)) %>
+  <% else %>
+  None
+<% end %>
+
 <h1><%= @post.title %></h1>
 <p><%= @post.content %></p>
 <% simple_format(@post.content) %>

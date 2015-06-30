@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
          :omniauthable, :omniauth_providers => [:facebook]
   has_one :profile
   has_many :posts
+  has_many :comments
+
   accepts_nested_attributes_for :profile, :allow_destroy => true, :reject_if => :all_blank
 
   def self.from_omniauth(auth)

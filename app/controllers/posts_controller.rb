@@ -1,25 +1,9 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_post, :only => [:show, :edit, :update, :destroy]
-  private
-
-  def set_post
-        @post =Post.find(params[:id])
-  end
-
-  def post_params
-    params.require(:post).permit(:title, :content)
-  end
-
-  public
-
-  def about
-
-  end
+  before_action :set_post, :only => [:show]
+  before_action :set_my_post, :only => [:edit, :update, :destroy]
   def index
-    @posts = Post.all
     prepare_variable_for_index_template
-    @posts = Post.page(params[:page]).per(5)
   end
 
   def new
@@ -27,14 +11,10 @@ class PostsController < ApplicationController
   end
 
   def create
-    Rails.logger.info('=========')
-    Rails.logger.info(params)
-    Rails.logger.info('=========')
-    Rails.logger.info(post_params)
-    Rails.logger.info('=========')
     @post = Post.new(post_params)
+    @post.user = current_user
 
-    @post.save
+    @post.save # TODO: handle validation error
 
     redirect_to posts_url
   end
@@ -43,8 +23,12 @@ class PostsController < ApplicationController
   end
 
   def update
+    if params[:_remove_logo] == "1"
+      @post.logo = nil
+    end
+
     @post.update(post_params)
-    redirect_to post_url(@post), :id => @post
+    redirect_to post_url(@post)
   end
 
   def destroy
@@ -54,15 +38,40 @@ class PostsController < ApplicationController
 
   def show
     @comment = Comment.new
-
   end
+
+  private
+
   def prepare_variable_for_index_template
+    if params[:cid]
+      @category = Category.find( params[:cid] )
+      @posts = @category.posts
+    else
+      @posts = Post.all
+    end
+
     if params[:order_by_time]
       @posts = @posts.order("comments_time DESC")
     elsif params[:order_by_count]
       @posts = @posts.order("comments_count DESC")
+    else
+      @posts = @posts.order("id DESC")
     end
 
+
+    @posts = @posts.page(params[:page]).per(5)
+  end
+
+  def set_post
+    @post =Post.find(params[:id])
+  end
+
+  def set_my_post
+    @post = current_user.posts.find(params[:id])
+  end
+
+  def post_params
+    params.require(:post).permit(:logo, :title, :content, :category_ids => [])
   end
 
 end
