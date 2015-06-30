@@ -19,7 +19,13 @@ class UserProfileController < ApplicationController
 
   end
   def update
-    @profile.update(params.require(:profile).permit(:name))
+    if patams[:_remove_logo] "1"
+      @post.logo = nil
+    @profile.update!(profile_params)
     redirect_to :action => :show
+  end
+
+  def profile_params
+    params.require(:user).permit(:name, :profile_attributes)
   end
 end

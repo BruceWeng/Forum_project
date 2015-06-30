@@ -1,3 +1,9 @@
+
+<%= f.file_field :logo %>
+<% if @post.logo.exists? %>
+  <%= check_box_tag "_remove_logo", "1" %> Remove logo
+<% end %>
+<br>
 <%= f.label :title, "Title" %>
 <%= f.text_field :title %>
 

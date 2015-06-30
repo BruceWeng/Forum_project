@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content)
+    params.require(:post).permit(:logo, :title, :content)
   end
 
   public
@@ -43,6 +43,9 @@ class PostsController < ApplicationController
   end
 
   def update
+    if params[:_remove_logo] == "1"
+      @post.logo = nil
+    end
     @post.update(post_params)
     redirect_to post_url(@post), :id => @post
   end
@@ -61,6 +64,8 @@ class PostsController < ApplicationController
       @posts = @posts.order("comments_time DESC")
     elsif params[:order_by_count]
       @posts = @posts.order("comments_count DESC")
+    else
+      @posts = Post.order("id DESC")
     end
 
   end
